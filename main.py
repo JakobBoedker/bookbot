@@ -46,12 +46,31 @@ def count_characters(book):
     return chardict
 
 
+
+def sort_on(d):
+    return d["num"]
+
+
+
+
+
+def book_report(book):
+    mylist = []
+    for char in book:
+        mylist.append({"char": char, "num": book[char]})
+    mylist.sort(reverse=True, key=sort_on)
+    return mylist
+
 def main():
     book_path = "books/frankenstein.txt"
     text = get_book_text(book_path)
-    counts = count_words(text)
-    print(f"There is {counts} words in the book")
-    print(count_characters(text))
+    book_report(count_characters(text))
+    print("beginning of the report")
+    print(f"Analyzing the book {book_path}")
+    print(f"The book has {count_words(text)} words")
+    for char in book_report(count_characters(text)):
+        print(f"The '{char['char']}' character was found {char['num']} times")
+    print("end of the report")
 
 
 if __name__ == "__main__":
